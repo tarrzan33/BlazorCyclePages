@@ -7,5 +7,6 @@ namespace BlazorCyclePages.SessionStates
         event Action OnTimerUp;
         void StartTimer(double interval);
         void RestartTimer(double interval);
+        void Stop();
     }
 }

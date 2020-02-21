@@ -4,7 +4,7 @@ using System;
 
 namespace BlazorCyclePages.Shared.CodeBehind
 {
-    public class SwitchPageTimer : ComponentBase
+    public class SwitchPageTimer : ComponentBase, IDisposable
     {
         
         private string NextPage;
@@ -20,16 +20,19 @@ namespace BlazorCyclePages.Shared.CodeBehind
         {
             TimerState.StartTimer(Interval);
             TimerState.OnTimerUp += TimerUp;
-            Console.WriteLine("State After Render");
         }
 
         private void TimerUp()
         {
-            Console.WriteLine("TimerUp");
             TimerState.OnTimerUp -= TimerUp;
             NavManager.NavigateTo(NextPage ?? "/");
         }
 
-        
+        public void Dispose()
+        {
+            TimerState.OnTimerUp -= TimerUp;
+            TimerState.Stop();
+        }
+
     }
 }

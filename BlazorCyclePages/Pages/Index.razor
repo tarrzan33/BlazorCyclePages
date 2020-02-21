@@ -1,5 +1,19 @@
 ﻿@page "/"
+@inherits SwitchPageTimer
 
+
+@using BlazorCyclePages.SessionStates
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+@code{
+    [Inject]
+    ITimerState TimerState { get; set; }
+
+    protected override void OnInitialized()
+    {
+        SetInterval(5000);
+        SetNextPage("Counter");
+    }
+}

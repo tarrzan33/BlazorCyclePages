@@ -30,5 +30,15 @@ namespace BlazorCyclePages.Services
             _timer.Interval = interval;
             _timer.Start();
         }
+
+        public void Stop()
+        {
+            if (_timer != null)
+            {
+                _timer.Elapsed -= NotifyTimerElapsed;
+                _timer.Stop();
+                _timer.Dispose();
+            }
+        }
     }
 }

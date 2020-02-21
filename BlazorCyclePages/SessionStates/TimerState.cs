@@ -11,7 +11,7 @@ namespace BlazorCyclePages.SessionStates
             Timer = timer;
         }
 
-        private double Interval = 5000;
+        private double Interval;
 
         public event Action OnTimerUp;
 
@@ -31,6 +31,11 @@ namespace BlazorCyclePages.SessionStates
         public void RestartTimer(double interval)
         {
             Timer.Restart(interval);
+        }
+        public void Stop()
+        {
+            Timer.OnElapsed -= TimerElapsedHandler;
+            Timer.Stop();
         }
     }
 }
